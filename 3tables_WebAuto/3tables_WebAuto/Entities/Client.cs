@@ -10,7 +10,7 @@ namespace _3tables_WebAuto.Entities
     {
         public Client()
         {
-            this.Purchase = new HashSet<Purchase>();
+            this.Purchases = new HashSet<Purchase>();
         }
          public int Id { get; set; }
         [Required]
@@ -20,7 +20,20 @@ namespace _3tables_WebAuto.Entities
         [MaxLength(30)]
         public string LastNAme { get; set; }
         [Required]
+        [MaxLength(10)]
+        [MinLength(10)]
+        public string ENG { get; set; }
+        [Required]
         [MaxLength(30)]
-        public string FirstNAme { get; set; }
+        public string Address{ get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        [MaxLength(10)]
+        
+        public string Phone { get; set; }
+
+        public ICollection<Purchase> Purchases { get; set; }
     }
 }
