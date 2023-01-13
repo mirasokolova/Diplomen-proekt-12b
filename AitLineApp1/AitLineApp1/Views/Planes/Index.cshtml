@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AitLineApp1.Entities.Plane>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaneCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaneModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlaneImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WeightOfLagage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BarOnBoard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeatsForPassengers)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlaneCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlaneModel)
+            </td>
+            <td>
+              <img src="@Html.DisplayFor(modelItem => item.PlaneImage)" alt="img" width="100" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeightOfLagage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BarOnBoard)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeatsForPassengers)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
