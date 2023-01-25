@@ -32,22 +32,27 @@
         @foreach (var item in Model)
         {
 
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Age)
-                </td>
-                <td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
 
-                    @Html.DisplayFor(modelItem => item.Breed)
-                </td>
-                <td>
-                    <img src="@Html.DisplayFor(modelItem => item. Image)" alt="Image" width="100" />
-                    @*@Html.DisplayFor(modelItem => item. Picture)*@
-                </td>
-            </tr>
+                @Html.DisplayFor(modelItem => item.Breed)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.Image)" alt="Image" width="100" />
+                @*@Html.DisplayFor(modelItem => item. Picture)*@
+            </td>
+            <td>
+                <a asp-action="Edit" asp-controller="Dogs" asp-route-id="@item.Id">Edit</a>
+                <a asp-for="Details"  asp-route-id="@item.Id">Detaild</a>
+                <a asp-for="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
         }
     <tbody>
 </table>
