@@ -105,14 +105,14 @@ namespace Dog_WebApp.Controllers
 
 
             DogCreateViewModel dog = new DogCreateViewModel()
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Age = item.Age,
-                    Breed = item.Breed,
-                    Image = item.Image,
-                };
-            
+            {
+                Id = item.Id,
+                Name = item.Name,
+                Age = item.Age,
+                Breed = item.Breed,
+                Image = item.Image,
+            };
+
             return View(dog);
         }
         [HttpPost]
@@ -126,7 +126,7 @@ namespace Dog_WebApp.Controllers
             context.Dogs.Remove(item);
             context.SaveChanges();
             return this.RedirectToAction("All", "Dogs");
-            
+
         }
 
 
@@ -136,21 +136,49 @@ namespace Dog_WebApp.Controllers
 
         public IActionResult Success()
         {
-                return this.View();
+            return this.View();
         }
 
-            public IActionResult All()
+
+        public IActionResult All(string searchStringBreed, string searchStringName)
+        {
+            List<DogAllViewModel> dogs = context.Dogs.Select(dogFromDb => new DogAllViewModel
             {
-                List<DogAllViewModel> dogs = context.Dogs.Select(dogFromDb => new DogAllViewModel
-                {
-                    Id = dogFromDb.Id,
-                    Name = dogFromDb.Name,
-                    Age = dogFromDb.Age,
-                    Breed = dogFromDb.Breed,
-                    Image = dogFromDb.Image
-                }).ToList();
-                return View(dogs);
+                Id = dogFromDb.Id,
+                Name = dogFromDb.Name,
+                Age = dogFromDb.Age,
+                Breed = dogFromDb.Breed,
+                Image = dogFromDb.Image
+            }).ToList();
+            if (!String.IsNullOrEmpty(searchStringBreed)&& !String.IsNullOrEmpty(searchStringName))
+            {
+                dogs = dogs.Where(x => x.Breed.Contains(searchStringBreed) && x.Name.Contains(searchStringName)).ToList();
+                    
             }
+            else if (!String.IsNullOrEmpty(searchStringBreed))
+            {
+                dogs = dogs.Where(x => x.Breed.Contains(searchStringBreed)).ToList();
+            }
+            else if (!String.IsNullOrEmpty(searchStringName))
+            {
+                dogs = dogs.Where(x => x.Name.Contains(searchStringName)).ToList();
+            }
+            return View(dogs);
+        }
+        public IActionResult Sort()
+        {
+            List<DogAllViewModel> dogs = context.Dogs.Select(dogFromDb => new DogAllViewModel
+            {
+                Id = dogFromDb.Id,
+                Name = dogFromDb.Name,
+                Age = dogFromDb.Age,
+                Breed = dogFromDb.Breed,
+                Image = dogFromDb.Image
+            }).OrderBy(x=>x.Name).ToList();
+            
+            return View(dogs);
+        }
+
     }
     
 }

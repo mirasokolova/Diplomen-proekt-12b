@@ -9,9 +9,23 @@
 <p>
     <a asp-action="Create">Create new Dog</a>
 </p>
+<form asp-controller="Dogs" asp-action="All" method="get">
+    <p>
+        Breed:<input type="text" name="SearchStringBreed" />
+        Name:<input type="text" name="SearchStringName" />
+        <input type="submit" name="Filter" />
+    </p>
+</form>
+<form asp-controller="Dogs" asp-action="Sort" method="get">
+    <p>
+        
+        <input type="submit" name="Sort" />
+    </p>
+</form>
 
 <table class="table">
     <thead>
+        
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -52,6 +66,7 @@
                 <a asp-for="Details"  asp-route-id="@item.Id">Detaild</a>
                 <a asp-for="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
+
         </tr>
         }
     <tbody>
