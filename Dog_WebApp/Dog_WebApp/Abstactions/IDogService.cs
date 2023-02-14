@@ -14,7 +14,6 @@ namespace Dog_WebApp.Abstactions
         Dog GetDogById(int dogId);
         bool RemoveById(int DogId);
         List<Dog> GetDogs(string searchStringBreed, string searchStringName);
-        
-
+       // object UpdateDog(string name, int age, string breed, string image);
     }
 }

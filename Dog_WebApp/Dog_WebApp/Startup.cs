@@ -1,4 +1,6 @@
+using Dog_WebApp.Abstactions;
 using Dog_WebApp.Data;
+using Dog_WebApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +36,7 @@ namespace Dog_WebApp
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddTransient<IDogService, DogService>();
             services.AddControllersWithViews();
             services.Configure<IdentityOptions>(options =>
             {
